@@ -2,6 +2,7 @@ package codefellowship.example.codefellowship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,13 @@ public class ApplicationUserController {
     @GetMapping("/")
     public String home(){
         return "home.html";
+    }
+
+    @GetMapping("/profile")
+    public String profile(@RequestParam(value = "username")String  username,Model m){
+
+        m.addAttribute("user", applicationUserRepository.findByUsername(username));
+        return "profile.html";
     }
 
     @GetMapping("/signup")
