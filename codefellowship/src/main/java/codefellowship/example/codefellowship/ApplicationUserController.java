@@ -76,7 +76,7 @@ public class ApplicationUserController {
     }
 
     @PostMapping("/addPost")
-    public RedirectView posting(@RequestParam(value = "body")String  body,@RequestParam(value = "post")String name,Model m){
+    public RedirectView posting(@RequestParam(value = "body")String  body,@RequestParam(value = "name")String name,Model m){
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         String time=formatter.format(date);
