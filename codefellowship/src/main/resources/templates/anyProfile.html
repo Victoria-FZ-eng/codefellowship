@@ -11,19 +11,10 @@
   <h2>Last Name: <span th:text="${user.lastName}"></span></h2>
   <p>Date Of Birth: <span th:text="${user.dateOfBirth}"></span></p>
   <p>Bio: <span th:text="${user.bio}"></span> </p>
- <img src="https://i.pinimg.com/originals/20/21/47/202147a8e6a40faef0c82c75f2547820.jpg" alt="P.p"/><br>
+  <img src="https://i.pinimg.com/originals/20/21/47/202147a8e6a40faef0c82c75f2547820.jpg" alt="P.p"/><br>
 </div>
 
-<form action="/addPost" method="post" >
-  <fieldset>
-    <legend>Post ...</legend>
-    <input type="text" id="body" name="body"><br>
 
-    <input type="hidden" name="id"  />
-    <input type="submit" value="Post"  id="post" name="post">
-
-  </fieldset>
-</form>
 
 </body>
 </html>

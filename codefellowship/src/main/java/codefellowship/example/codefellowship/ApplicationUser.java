@@ -1,10 +1,11 @@
 package codefellowship.example.codefellowship;
 
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -19,6 +20,17 @@ public class ApplicationUser implements UserDetails {
     private String lastName;
     private String bio;
     private String dateOfBirth;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    @OneToMany(mappedBy = "firstName")
+    private List<Post> posts;
 
     public ApplicationUser(){
 

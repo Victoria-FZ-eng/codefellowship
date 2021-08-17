@@ -61,7 +61,6 @@ public class ApplicationUserController {
     @GetMapping("/allUsers")
     public String viewUsers(Model m, @RequestParam(value = "name")String username){
 
-      //  System.out.println("-------------------------------inside allUsers--------------------------------");
         m.addAttribute("allUsers",applicationUserRepository.findAll());
         m.addAttribute("theUser",applicationUserRepository.findByUsername(username));
         return "allUsers.html";
@@ -69,7 +68,6 @@ public class ApplicationUserController {
 
     @GetMapping("/profile")
     public String profile(@RequestParam(value = "name")String  username,Model m){
-       // System.out.println("-------------------------------inside profile--------------------------------");
         m.addAttribute("user", applicationUserRepository.findByUsername(username));
         return "profile.html";
     }
@@ -78,13 +76,12 @@ public class ApplicationUserController {
     public String userPro(Model m,@RequestParam(value="id") Integer id){
         ApplicationUser user = applicationUserRepository.findById(id).get();
         m.addAttribute("user",user);
-        return "profile.html";
+        return "anyProfile.html";
     }
 
     @GetMapping("/hello")
     @ResponseBody
     public String getHome(){
-        //System.out.println("-----------------------helloooooooooooooo");
         return "Hello";
     }
 
