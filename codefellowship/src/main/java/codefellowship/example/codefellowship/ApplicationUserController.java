@@ -74,7 +74,8 @@ public class ApplicationUserController {
     public String profile(@RequestParam(value = "name")String  username,Model m){
         boolean postss= false;
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        Post posts = postRepository.findByUserId(user);
+        Integer userId = applicationUserRepository.findByUsername(username).getId();
+        Post posts = postRepository.findByUserId(userId);
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);
         if(posts != null){
@@ -101,7 +102,7 @@ public class ApplicationUserController {
     public String userPro(Model m,@RequestParam(value="id") Integer id){
         boolean postss= false;
         ApplicationUser user = applicationUserRepository.findById(id).get();
-        Post posts = postRepository.findByUserId(user);
+        Post posts = postRepository.findByUserId(user.getId());
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);
         if(posts != null){
