@@ -22,7 +22,9 @@ public class Post {
         this.user = userPost;
     }
 
+    public Post(){
 
+    }
     public int getId() {
         return id;
     }

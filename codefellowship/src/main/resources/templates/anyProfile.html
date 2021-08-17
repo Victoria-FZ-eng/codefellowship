@@ -13,10 +13,11 @@
   <p>Bio: <span th:text="${user.bio}"></span> </p>
   <img src="https://i.pinimg.com/originals/20/21/47/202147a8e6a40faef0c82c75f2547820.jpg" alt="P.p"/><br>
 </div>
-<div th:each="post: ${posts}">
-  <p><span th:text="${post.time}"></span></p>
-  <p><span th:text="${post.body}"></span></p>
-</div>
+
+  <div th:if="${postss} == true" action="" th:each="post: ${posts}">
+    <p><span th:text="${post.time}"></span></p>
+    <p><span th:text="${post.body}"></span></p>
+  </div>
 
 
 </body>

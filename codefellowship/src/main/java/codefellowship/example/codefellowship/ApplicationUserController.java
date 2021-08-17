@@ -8,6 +8,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @Controller
 public class ApplicationUserController {
@@ -70,8 +71,15 @@ public class ApplicationUserController {
 
     @GetMapping("/profile")
     public String profile(@RequestParam(value = "name")String  username,Model m){
-        m.addAttribute("user", applicationUserRepository.findByUsername(username));
-       // m.addAttribute("posts",postRepository.findByUser(applicationUserRepository.findByUsername(username)));
+        boolean postss= false;
+        ApplicationUser user = applicationUserRepository.findByUsername(username);
+        Post posts = postRepository.findByUser(user);
+        m.addAttribute("user",user);
+        m.addAttribute("posts",posts);
+        if(posts != null){
+            postss = true;
+            m.addAttribute("postss",postss);
+        }
         return "profile.html";
     }
 
@@ -90,10 +98,16 @@ public class ApplicationUserController {
 
     @GetMapping("/profile/id")
     public String userPro(Model m,@RequestParam(value="id") Integer id){
+        boolean postss= false;
         ApplicationUser user = applicationUserRepository.findById(id).get();
         Post posts = postRepository.findByUser(user);
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);
+        if(posts != null){
+            postss = true;
+            m.addAttribute("postss",postss);
+        }
+
         return "anyProfile.html";
     }
 

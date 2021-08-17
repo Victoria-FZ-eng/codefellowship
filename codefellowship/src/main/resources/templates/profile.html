@@ -22,7 +22,7 @@
 <!--    <input type="hidden" name="name"  />-->
 <!--    <input type="submit" value="Post"  id="name" name="name">-->
 
-    <button name="name" id="name" type="submit" value=user.username>Post</button>
+    <button name="name" id="name" type="submit" th:value="[user.username]">Post</button>
 
 
   </fieldset>
@@ -30,7 +30,7 @@
 
 </div>
 
-<div th:each="post: ${posts}">
+<div th:if="${postss} == true" action="" th:each="post: ${posts}">
   <p><span th:text="${post.time}"></span></p>
   <p><span th:text="${post.body}"></span></p>
 </div>
