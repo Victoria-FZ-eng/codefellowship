@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -73,7 +74,7 @@ public class ApplicationUserController {
     public String profile(@RequestParam(value = "name")String  username,Model m){
         boolean postss= false;
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        Post posts = postRepository.findByUser(user);
+        Post posts = postRepository.findByUserId(user);
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);
         if(posts != null){
@@ -84,12 +85,12 @@ public class ApplicationUserController {
     }
 
     @PostMapping("/addPost")
-    public RedirectView posting(@RequestParam(value = "body")String  body,@RequestParam(value = "name")String name,Model m){
+    public RedirectView posting(@RequestParam(value = "body")String  body, Principal principal, Model m){
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         String time=formatter.format(date);
 
-        ApplicationUser user= applicationUserRepository.findByUsername(name);
+        ApplicationUser user= applicationUserRepository.findByUsername(principal.getName());
         Post post= new Post(body,time,user);
         postRepository.save(post);
 
@@ -100,7 +101,7 @@ public class ApplicationUserController {
     public String userPro(Model m,@RequestParam(value="id") Integer id){
         boolean postss= false;
         ApplicationUser user = applicationUserRepository.findById(id).get();
-        Post posts = postRepository.findByUser(user);
+        Post posts = postRepository.findByUserId(user);
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);
         if(posts != null){
