@@ -5,12 +5,12 @@
   <title>Title</title>
 </head>
 <body>
-<header  ><span text="${user.username}"></span></header>
-<div object="${user}" id="user">
-  <h1>First Name: <span text="${user.firstName}"></span></h1>
-  <h2>Last Name: <span text="${user.lastName}"></span></h2>
-  <p>Date Of Birth: <span text="${user.dateOfBirth}"></span></p>
-  <p>Bio: <span text="${user.bio}"></span> </p>
+<header  th:object="${user}"><span th:text="${user.username}"></span></header>
+<div th:object="${user}" id="user">
+  <h1>First Name: <span th:text="${user.firstName}"></span></h1>
+  <h2>Last Name: <span th:text="${user.lastName}"></span></h2>
+  <p>Date Of Birth: <span th:text="${user.dateOfBirth}"></span></p>
+  <p>Bio: <span th:text="${user.bio}"></span> </p>
  <img src="https://i.pinimg.com/originals/20/21/47/202147a8e6a40faef0c82c75f2547820.jpg" alt="P.p"/><br>
 
 
@@ -22,7 +22,7 @@
 <!--    <input type="hidden" name="id"  />-->
 <!--    <input type="submit" value="Post"  id="post" name="post">-->
 
-    <button name="post" id="post" type="submit" value=${user.username}>Post</button>
+    <button name="post" id="post" type="submit" th:value=${user.username}>Post</button>
 
 
   </fieldset>
@@ -30,9 +30,9 @@
 
 </div>
 
-<div each="post: ${posts}">
-  <p><span text="${post.time}"></span></p>
-  <p><span text="${post.body}"></span></p>
+<div th:each="post: ${posts}">
+  <p><span th:text="${post.time}"></span></p>
+  <p><span th:text="${post.body}"></span></p>
 </div>
 </body>
 </html>
