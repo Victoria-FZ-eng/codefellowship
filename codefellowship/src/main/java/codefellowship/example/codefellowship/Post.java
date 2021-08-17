@@ -14,12 +14,12 @@ public class Post {
     private String time;
 
     @ManyToOne
-    private ApplicationUser userPost;
+    private ApplicationUser user;
 
     public Post(String body, String time, ApplicationUser userPost) {
         this.body = body;
         this.time = time;
-        this.userPost = userPost;
+        this.user = userPost;
     }
 
 
@@ -36,7 +36,7 @@ public class Post {
     }
 
     public ApplicationUser getUserPost() {
-        return userPost;
+        return user;
     }
 
 
@@ -49,6 +49,6 @@ public class Post {
     }
 
     public void setUserPost(ApplicationUser userPost) {
-        this.userPost = userPost;
+        this.user = userPost;
     }
 }

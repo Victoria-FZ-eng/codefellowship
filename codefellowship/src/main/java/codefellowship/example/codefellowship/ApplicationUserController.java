@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Controller
 public class ApplicationUserController {
 
@@ -13,6 +16,8 @@ public class ApplicationUserController {
     ApplicationUserRepository applicationUserRepository;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    PostRepository postRepository;
 
     @GetMapping("/")
     public String home(){
@@ -55,9 +60,6 @@ public class ApplicationUserController {
 
 
 
-
-
-
     @GetMapping("/allUsers")
     public String viewUsers(Model m, @RequestParam(value = "name")String username){
 
@@ -69,13 +71,29 @@ public class ApplicationUserController {
     @GetMapping("/profile")
     public String profile(@RequestParam(value = "name")String  username,Model m){
         m.addAttribute("user", applicationUserRepository.findByUsername(username));
+        m.addAttribute("posts",postRepository.findByUser(applicationUserRepository.findByUsername(username)));
         return "profile.html";
+    }
+
+    @PostMapping("/addPost")
+    public RedirectView posting(@RequestParam(value = "body")String  body,@RequestParam(value = "post")String name,Model m){
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        String time=formatter.format(date);
+
+        ApplicationUser user= applicationUserRepository.findByUsername(name);
+        Post post= new Post(body,time,user);
+        postRepository.save(post);
+
+        return new RedirectView("/profile");
     }
 
     @GetMapping("/profile/id")
     public String userPro(Model m,@RequestParam(value="id") Integer id){
         ApplicationUser user = applicationUserRepository.findById(id).get();
+        Post posts = postRepository.findByUser(user);
         m.addAttribute("user",user);
+        m.addAttribute("posts",posts);
         return "anyProfile.html";
     }
 

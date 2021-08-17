@@ -29,7 +29,7 @@ public class ApplicationUser implements UserDetails {
         this.posts = posts;
     }
 
-    @OneToMany(mappedBy = "firstName")
+    @OneToMany(mappedBy = "time")
     private List<Post> posts;
 
     public ApplicationUser(){
