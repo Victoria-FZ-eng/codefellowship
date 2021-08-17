@@ -44,8 +44,13 @@ public class ApplicationUserController {
 
     @PostMapping("/login")
     public String goToProfile(Model m,@RequestParam(value="username") String username){
+        boolean isLoggedIn= false;
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        m.addAttribute("user",user);
+        if(applicationUserRepository.findByUsername(username) != null){
+            m.addAttribute("user",user);
+            isLoggedIn = true;
+        }
+        m.addAttribute("isLoggedIn",isLoggedIn);
         return "profile.html";
     }
 
