@@ -3,33 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{style.css}"/>
+    <link rel="stylesheet" href="@{style}"/>
 </head>
 <body>
-<header  th:if="${isLoggedIn == true}" th:object="${user}"><span th:text="${user.username}"></span></header>
+
 <main>
 
-    <form th:if="${isLoggedIn == true}"  method="get" action="/profile">
-        <button name="name" type="submit" th:value=${user.username}>My Profile</button>
-    </form>
 
-
-
-    <form th:if="${isLoggedIn == true}" method = RequestMethod.GET action="/allUsers"  >
-        <button name="name" type="submit" th:value=${user.username}>Community</button>
-    </form>
-
-
-
-    <form th:if="!${isLoggedIn == true}" method="get" action="/login">
+    <form method="get" action="/login">
         <button type="submit">Sign In</button>
     </form>
     <h1>Welcome to CodeFellow ship</h1>
     <p>CodeFellow-Ship App allows you to learn coding and to connect with people using this app and support each other on the coding journeys.</p>
-    <form th:if="!${isLoggedIn == true}" method="get" action="/signup">
+    <form method="get" action="/signup">
         <button type="submit">Sign Up</button>
     </form>
-
 
 </main>
 <footer>

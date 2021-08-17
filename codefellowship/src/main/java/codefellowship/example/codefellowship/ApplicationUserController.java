@@ -71,7 +71,7 @@ public class ApplicationUserController {
     @GetMapping("/profile")
     public String profile(@RequestParam(value = "name")String  username,Model m){
         m.addAttribute("user", applicationUserRepository.findByUsername(username));
-        m.addAttribute("posts",postRepository.findByUser(applicationUserRepository.findByUsername(username)));
+       // m.addAttribute("posts",postRepository.findByUser(applicationUserRepository.findByUsername(username)));
         return "profile.html";
     }
 

@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="@{style.css}"/>
 </head>
 <body>
-<header  th:object="${user}"><span th:text="${user.username}"></span></header>
+<header  object="${user}"><span text="${user.username}"></span></header>
 <main>
 
   <form  method="get" action="/profile">
-    <button name="name" type="submit" th:value=${user.username}>My Profile</button>
+    <button name="name" type="submit" value=${user.username}>My Profile</button>
   </form>
 
 
 
   <form  method = RequestMethod.GET action="/allUsers"  >
-    <button name="name" type="submit" th:value=${user.username}>Community</button>
+    <button name="name" type="submit" value=${user.username}>Community</button>
   </form>
 
 
