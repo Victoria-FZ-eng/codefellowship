@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -28,9 +29,24 @@ public class ApplicationUserController {
         return "profile.html";
     }
 
+
+    @GetMapping("/hello")
+    @ResponseBody
+    public String getHome(){
+
+        return "Hello";
+    }
+
     @GetMapping("/signup")
     public String getSignUpPage(){
         return "signUp.html";
+    }
+
+    @PostMapping("/login")
+    public String goToProfile(Model m,@RequestParam(value="username") String username){
+        ApplicationUser user = applicationUserRepository.findByUsername(username);
+        m.addAttribute("user",user);
+        return "profile.html";
     }
 
     @GetMapping("/login")
