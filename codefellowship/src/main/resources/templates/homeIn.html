@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="@{style}"/>
+</head>
+<body>
+<header ><span th:text="${user.username}"></span></header>
+<main>
+
+  <form  method="get" action="/profile" >
+    <button name="name" type="submit" th:value=${user.username}>My Profile</button>
+  </form>
+
+
+
+  <form  method ="get" action="/allUsers"  >
+    <button name="name" type="submit" th:value=${user.username}>Community</button>
+  </form>
+
+
+  <h1>Welcome to CodeFellow ship</h1>
+  <p>CodeFellow-Ship App allows you to learn coding and to connect with people using this app and support each other on the coding journeys.</p>
+
+
+
+</main>
+<footer>
+
+</footer>
+</body>
+</html>
