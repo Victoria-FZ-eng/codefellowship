@@ -9,6 +9,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -70,8 +71,8 @@ public class ApplicationUserController {
     public String profile(@RequestParam(value = "name")String  username,Model m){
         boolean postss= false;
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        Integer userId = user.getId();
-        Post posts = postRepository.findByUserId(userId);
+
+        List<Post> posts = user.getPosts();
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);
         if(posts != null){
@@ -98,7 +99,7 @@ public class ApplicationUserController {
     public String userPro(Model m,@RequestParam(value="id") Integer id){
         boolean postss= false;
         ApplicationUser user = applicationUserRepository.findById(id).get();
-        Post posts = postRepository.findByUserId(user.getId());
+        List<Post> posts = user.getPosts();
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);
         if(posts != null){
