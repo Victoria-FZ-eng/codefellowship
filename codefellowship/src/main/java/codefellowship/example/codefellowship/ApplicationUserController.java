@@ -49,14 +49,10 @@ public class ApplicationUserController {
     }
 
     @PostMapping("/login")
-    public String goToHomePage(Model m,@RequestParam(value="username") String username){
+    public String goToHomePage(Model m, @RequestParam(value="username") String username){
         boolean isLoggedIn= false;
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        if(applicationUserRepository.findByUsername(username) != null){
-            m.addAttribute("user",user);
-            isLoggedIn = true;
-        }
-        m.addAttribute("isLoggedIn",isLoggedIn);
+        m.addAttribute("user",user);
         return "homeIn.html";
     }
 
@@ -66,7 +62,7 @@ public class ApplicationUserController {
     public String viewUsers(Model m, @RequestParam(value = "name")String username){
 
         m.addAttribute("allUsers",applicationUserRepository.findAll());
-        m.addAttribute("theUser",applicationUserRepository.findByUsername(username));
+       // m.addAttribute("theUser",applicationUserRepository.findByUsername(username));
         return "allUsers.html";
     }
 
@@ -74,7 +70,7 @@ public class ApplicationUserController {
     public String profile(@RequestParam(value = "name")String  username,Model m){
         boolean postss= false;
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        Integer userId = applicationUserRepository.findByUsername(username).getId();
+        Integer userId = user.getId();
         Post posts = postRepository.findByUserId(userId);
         m.addAttribute("user",user);
         m.addAttribute("posts",posts);

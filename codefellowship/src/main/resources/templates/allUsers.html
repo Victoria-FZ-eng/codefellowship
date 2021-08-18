@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<header  th:object="${theUser}"><span th:text="${theUser.username}"></span></header>
+<!--<header  th:object="${theUser}"><span th:text="${theUser.username}"></span></header>-->
 <div th:each="user: ${allUsers}" id="user">
   <h1>First Name: <span th:text="${user.firstName}"></span></h1>
   <h2>Last Name: <span th:text="${user.lastName}"></span></h2>

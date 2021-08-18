@@ -6,10 +6,10 @@
   <link rel="stylesheet" href="@{style}"/>
 </head>
 <body>
-<header  th:object="${user}"><span th:text="${user.username}"></span></header>
+<header ><span th:text="${user.username}"></span></header>
 <main>
 
-  <form  method="get" action="/profile">
+  <form  method="get" action="/profile" >
     <button name="name" type="submit" th:value=${user.username}>My Profile</button>
   </form>
 
